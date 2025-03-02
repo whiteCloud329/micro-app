@@ -3,12 +3,23 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { resolve } from 'node:path'
 import * as process from 'process'
+
 function pathResolver(dir: string) {
     return resolve(process.cwd(), '.', dir)
 }
+
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue(), vueDevTools()],
+    plugins: [
+        vue({
+            template: {
+                compilerOptions: {
+                    isCustomElement: (tag) => tag.startsWith('micro-app'),
+                },
+            },
+        }),
+        vueDevTools(),
+    ],
     resolve: {
         alias: [
             {

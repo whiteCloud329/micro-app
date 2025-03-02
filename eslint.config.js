@@ -67,7 +67,7 @@ export default [
                     semi: false,
                 },
             ],
-            'no-console': 'error', // 关闭console提示
+            'no-console': 0, // 关闭console提示
             'vue/valid-template-root': 0,
             '@typescript-eslint/no-unused-vars': 'error', // 变量未使用
             '@typescript-eslint/no-explicit-any': 'off', // ts any声明禁止

@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import microApp, { getActiveApps } from '@micro-zoe/micro-app'
+
+const pushDemo = () => {
+    console.log(getActiveApps())
+    // 主应用通过下发data数据控制子应用跳转
+    microApp.setData(getActiveApps()[0], { path: '/vue/demo' })
+}
 </script>
 
 <template>
-    <div>
-        <a href="https://vitejs.dev" target="_blank">
-            <img src="/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://vuejs.org/" target="_blank">
-            <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-        </a>
-    </div>
-    <HelloWorld msg="Vite + Vue" />
-    <router-view></router-view>
+    <router-link to="/vue/demo">demo</router-link>
+    <button @click="pushDemo">跳转到demo</button>
+    <router-view :key="$route.name"></router-view>
 </template>
 
 <style scoped>
@@ -22,9 +21,11 @@ import HelloWorld from './components/HelloWorld.vue'
     will-change: filter;
     transition: filter 300ms;
 }
+
 .logo:hover {
     filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
     filter: drop-shadow(0 0 2em #42b883aa);
 }
