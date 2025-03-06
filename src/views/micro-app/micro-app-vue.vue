@@ -1,7 +1,7 @@
 <template>
     <micro-app
         name="micro-app-vue"
-        url="http://localhost:3000/vue/"
+        url="http://localhost:4001/sub-vue/"
         @mounted="handleMount"
         @error="handleError"
         iframe

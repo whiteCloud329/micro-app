@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import microApp, { getActiveApps } from '@micro-zoe/micro-app'
+// import microApp, { getActiveApps } from '@micro-zoe/micro-app'
+import MicroLayout from '@/layout/index.vue'
+// import MicroAppVueView from '@/views/micro-app/micro-app-vue.vue'
+// import MicroLayout from '@/layout/index.vue'
 
-const pushDemo = () => {
-    console.log(getActiveApps())
-    // 主应用通过下发data数据控制子应用跳转
-    microApp.setData(getActiveApps()[0], { path: '/vue/demo' })
-}
+// const pushDemo = () => {
+//     console.log(getActiveApps())
+//     // 主应用通过下发data数据控制子应用跳转
+//     microApp.setData(getActiveApps()[0], { path: '/vue/demo' })
+// }
 </script>
 
 <template>
-    <router-link to="/vue/demo">demo</router-link>
-    <button @click="pushDemo">跳转到demo</button>
-    <router-view :key="$route.name"></router-view>
+    <microLayout></microLayout>
+    <!--    <micro-app-vue-view></micro-app-vue-view>-->
 </template>
 
 <style scoped>

@@ -14,7 +14,7 @@ export default defineConfig({
         vue({
             template: {
                 compilerOptions: {
-                    isCustomElement: (tag) => tag.startsWith('micro-app'),
+                    isCustomElement: (tag) => /^micro-app/.test(tag),
                 },
             },
         }),
