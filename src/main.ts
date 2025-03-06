@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import './style.css'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import App from './App.vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
@@ -50,4 +52,5 @@ pinia.use(({ store }) => {
     }
 })
 app.use(pinia)
+app.use(ElementPlus)
 app.mount('#app')

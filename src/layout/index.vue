@@ -1,16 +1,23 @@
 <template>
-    <div>
-        <h1>主应用</h1>
-        <micro-app
-            v-if="currentApp"
-            :name="currentApp.name"
-            :url="currentApp.url"
-            iframe
-            keep-router-state
-            disable-memory-router
-            route-mode="pure"
-        >
-        </micro-app>
+    <div class="layout">
+        <div class="layout-header">
+            <layout-header></layout-header>
+        </div>
+        <div class="layout-container">
+            <div class="layout-aside">侧边栏</div>
+            <div class="layout-main">
+                <micro-app
+                    v-if="currentApp"
+                    :name="currentApp.name"
+                    :url="currentApp.url"
+                    iframe
+                    keep-router-state
+                    disable-memory-router
+                    route-mode="pure"
+                >
+                </micro-app>
+            </div>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -19,6 +26,7 @@ import { computed } from 'vue'
 defineOptions({ name: 'microLayout' })
 import microApp from '@micro-zoe/micro-app'
 import { useRoute } from 'vue-router'
+import LayoutHeader from '@/layout/layout-header.vue'
 
 const route = useRoute()
 
@@ -43,4 +51,28 @@ const currentApp = computed(() => {
     )
 })
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.layout {
+    width: calc(100vw);
+    height: 100%;
+
+    .layout-header {
+        width: 100%;
+        height: 50px;
+        background-color: red;
+    }
+
+    .layout-container {
+        display: flex;
+
+        .layout-aside {
+            width: 220px;
+            height: calc(100vh - 50px);
+        }
+
+        .layout-main {
+            flex: 1;
+        }
+    }
+}
+</style>

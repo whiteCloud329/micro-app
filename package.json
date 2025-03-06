@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@micro-zoe/micro-app": "1.0.0-rc.21",
+    "element-plus": "^2.9.5",
     "pinia": "^2.3.1",
     "pinia-plugin-persistedstate": "^4.2.0",
     "vue": "^3.5.13",
@@ -36,6 +37,7 @@
     "globals": "^15.15.0",
     "husky": "^9.1.7",
     "prettier": "^3.5.2",
+    "sass-embedded": "^1.85.1",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.1.1",
