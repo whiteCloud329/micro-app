@@ -1,0 +1,56 @@
+.login-container {
+  width: 100%;
+  height: 100%;
+  background: url(@/assets/images/login/login-bg.png) no-repeat center;
+  background-size: cover;
+  @apply flex-center-center;
+
+  .login-box {
+    width: 380px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 16px 73px 8px rgba(203, 203, 203, 0.2);
+    padding: 23px 25px;
+
+    .login-title {
+      font-size: 30px;
+      font-weight: 700;
+      text-align: center;
+      color: #1e1e1e;
+      margin-bottom: 35px;
+    }
+
+    .login-form {
+
+      .captcha-input {
+        width: 55%;
+        padding-right: 2%;
+      }
+
+      .captcha-img {
+        cursor: pointer;
+      }
+
+      .form-check {
+        :deep(.el-form-item__content) {
+          margin-left: 30px !important;
+        }
+      }
+    }
+
+
+    .btn {
+      width: 360px;
+      height: 50px;
+      background: #1748FD;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      color: #ffffff;
+      line-height: 50px;
+      cursor: pointer;
+      margin: 0 auto;
+    }
+  }
+}
