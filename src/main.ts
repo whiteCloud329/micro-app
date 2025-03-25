@@ -3,9 +3,13 @@ import './style.css'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
+import '@unocss/reset/normalize.css'
+import '@/styles/index.scss'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
 import microApp from '@micro-zoe/micro-app'
+import 'virtual:uno.css'
+import '@unocss/reset/normalize.css'
 
 microApp.start({
     'router-mode': 'pure', // 所有子应用都设置为pure模式

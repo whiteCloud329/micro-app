@@ -9,7 +9,7 @@
   "experimentalTernaries": false,
   "tabWidth": 4,
   "useTabs": false,
-  "quoteProps": "consistent",
+  "quoteProps": "preserve",
   "jsxSingleQuote": false,
   "bracketSpacing": true,
   "bracketSameLine": false,

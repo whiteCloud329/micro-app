@@ -65,6 +65,19 @@ export default [
                 {
                     // endOfLine: "auto"
                     semi: false,
+                    singleQuote: true, // 强制单引号
+                    quoteProps: 'consistent', // 保持对象属性引号一致性
+                },
+            ],
+            // 关闭基础引号规则
+            quotes: 'off',
+            // 启用TypeScript风格引号规则（智能模式）
+            '@stylistic/js/quotes': [
+                'error',
+                'single',
+                {
+                    avoidEscape: true, // 允许包含转义字符
+                    allowTemplateLiterals: true, // 允许模板字符串
                 },
             ],
             'no-console': 0, // 关闭console提示

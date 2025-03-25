@@ -6,50 +6,51 @@
         <div class="layout-container">
             <div class="layout-aside">侧边栏</div>
             <div class="layout-main">
-                <micro-app
-                    v-if="currentApp"
-                    :name="currentApp.name"
-                    :url="currentApp.url"
-                    iframe
-                    keep-router-state
-                    disable-memory-router
-                    route-mode="pure"
-                >
-                </micro-app>
+                <router-view></router-view>
+                <!--                <micro-app-->
+                <!--                    v-if="currentApp"-->
+                <!--                    :name="currentApp.name"-->
+                <!--                    :url="currentApp.url"-->
+                <!--                    iframe-->
+                <!--                    keep-router-state-->
+                <!--                    disable-memory-router-->
+                <!--                    route-mode="pure"-->
+                <!--                >-->
+                <!--                </micro-app>-->
             </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue'
+// import { computed } from 'vue'
 
 defineOptions({ name: 'microLayout' })
-import microApp from '@micro-zoe/micro-app'
-import { useRoute } from 'vue-router'
+// import microApp from '@micro-zoe/micro-app'
+// import { useRoute } from 'vue-router'
 import LayoutHeader from '@/layout/layout-header.vue'
 
-const route = useRoute()
+// const route = useRoute()
 
-const microApps = [
-    {
-        name: 'vue-sub-app',
-        url: 'http://localhost:4001',
-        baseroute: '/sub-vue',
-        activeRule: '/sub-vue',
-    },
-    {
-        name: 'react-sub-app',
-        url: 'http://localhost:5173',
-        baseroute: '/react-sub',
-        activeRule: '/react-sub',
-    },
-]
-
-const currentApp = computed(() => {
-    return (
-        microApps.find((app) => route.path.startsWith(app.activeRule)) || null
-    )
-})
+// const microApps = [
+//     {
+//         name: 'vue-sub-app',
+//         url: 'http://localhost:4001',
+//         baseroute: '/sub-vue',
+//         activeRule: '/sub-vue',
+//     },
+//     {
+//         name: 'react-sub-app',
+//         url: 'http://localhost:5173',
+//         baseroute: '/react-sub',
+//         activeRule: '/react-sub',
+//     },
+// ]
+//
+// const currentApp = computed(() => {
+//     return (
+//         microApps.find((app) => route.path.startsWith(app.activeRule)) || null
+//     )
+// })
 </script>
 <style scoped lang="scss">
 .layout {

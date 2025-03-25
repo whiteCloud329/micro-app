@@ -1,31 +1,42 @@
 <template>
     <micro-app
-        name="micro-app-vue"
-        url="http://localhost:4001/sub-vue/"
-        @mounted="handleMount"
-        @error="handleError"
+        v-if="currentApp"
+        :name="currentApp.name"
+        :url="currentApp.url"
         iframe
-        router-mode="pure"
-        :data="microAppData"
-    ></micro-app>
+        keep-router-state
+        disable-memory-router
+        route-mode="pure"
+    >
+    </micro-app>
 </template>
 <script setup lang="ts">
-import microApp, { removeDomScope } from '@micro-zoe/micro-app'
-import { reactive } from 'vue'
+import microApp from '@micro-zoe/micro-app'
+// import { reactive } from 'vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 defineOptions({ name: 'microAppVueView' })
-const handleMount = () => {
-    window.console.log('mounted,应用加载完毕')
-}
-const handleError = (e) => {
-    window.console.error('加载失败:', e.detail.error)
-}
-const microAppData = reactive({
-    pushState: (path) => {
-        removeDomScope()
-        console.log(path)
-        // this.$router.push(path)
+const route = useRoute()
+const microApps = [
+    {
+        name: 'vue-sub-app',
+        url: 'http://localhost:4001',
+        baseroute: '/sub-vue',
+        activeRule: '/sub-vue',
     },
+    {
+        name: 'react-sub-app',
+        url: 'http://localhost:5173',
+        baseroute: '/react-sub',
+        activeRule: '/react-sub',
+    },
+]
+
+const currentApp = computed(() => {
+    return (
+        microApps.find((app) => route.path.startsWith(app.activeRule)) || null
+    )
 })
 </script>
 <style scoped lang="scss"></style>

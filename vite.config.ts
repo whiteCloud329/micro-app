@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { resolve } from 'node:path'
 import * as process from 'process'
+import UnoCSS from 'unocss/vite'
 
 function pathResolver(dir: string) {
     return resolve(process.cwd(), '.', dir)
@@ -19,7 +20,18 @@ export default defineConfig({
             },
         }),
         vueDevTools(),
+        UnoCSS(),
     ],
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler', // 或 "modern"，"legacy"
+                importers: [
+                    // ...
+                ],
+            },
+        },
+    },
     resolve: {
         alias: [
             {
@@ -31,5 +43,14 @@ export default defineConfig({
                 replacement: pathResolver('/src/views'),
             },
         ],
+    },
+    server: {
+        host: 'localhost.baiyunby.cn',
+        proxy: {
+            '/smart-admin-api': {
+                target: 'https://smart-admin.baiyunby.cn',
+                changeOrigin: true,
+            },
+        },
     },
 })
