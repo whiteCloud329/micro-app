@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import microLayout from '@/layout/index.vue'
 import { getCookie } from '@/libs/cokkies'
 import { useUserStore } from '@/store/user.ts'
+import mock from '@/router/mock.ts'
 
 const router = createRouter({
     routes: [
@@ -53,6 +54,7 @@ router.beforeEach((to, _from, next) => {
 
     // 首页（ 需要登录 ，但不需要验证权限）
     if (to.path === '/') {
+        useUserStore().setUserLoginInfo(mock.data)
         next()
         return
     }

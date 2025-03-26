@@ -80,7 +80,7 @@ export const getService = (url: string, params: object) => {
 
 // 封装post请求
 export const postService = (url: string, params: object) => {
-    return service.post(url, { data: params })
+    return service.post(url, { ...params })
 }
 
 // export default service

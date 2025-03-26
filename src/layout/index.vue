@@ -4,7 +4,9 @@
             <layout-header></layout-header>
         </div>
         <div class="layout-container">
-            <div class="layout-aside">侧边栏</div>
+            <div class="layout-aside">
+                <layout-side></layout-side>
+            </div>
             <div class="layout-main">
                 <router-view></router-view>
                 <!--                <micro-app-->
@@ -23,6 +25,8 @@
 </template>
 <script setup lang="ts">
 // import { computed } from 'vue'
+
+import LayoutSide from '@/layout/layout-side.vue'
 
 defineOptions({ name: 'microLayout' })
 // import microApp from '@micro-zoe/micro-app'

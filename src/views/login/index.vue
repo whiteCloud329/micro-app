@@ -11,22 +11,21 @@
             >
                 <el-form-item label="用户名" prop="loginName">
                     <el-input
-                        v-model:value.trim="loginForm.loginName"
+                        v-model.trim="loginForm.loginName"
                         placeholder="请输入用户名"
                     ></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
                     <el-input
-                        v-model:value="loginForm.password"
-                        autocomplete="on"
-                        :type="showPassword ? 'text' : 'password'"
+                        v-model.trim="loginForm.password"
+                        :show-password="!showPassword"
                         placeholder="请输入密码"
                     />
                 </el-form-item>
                 <el-form-item label="验证码" prop="captchaCode">
                     <el-input
                         class="captcha-input"
-                        v-model:value.trim="loginForm.captchaCode"
+                        v-model.trim="loginForm.captchaCode"
                         placeholder="请输入验证码"
                     />
                     <img
@@ -71,6 +70,7 @@ const loginForm = reactive<loginType>({
     password: '',
     captchaCode: '',
     captchaUuid: '',
+    loginDevice: 1,
 })
 const showPassword = ref(false)
 const router = useRouter()
@@ -116,7 +116,7 @@ const onLogin = () => {
                 // 更新用户信息到pinia
                 useUserStore().setUserLoginInfo(res.data)
                 // 构建系统的路由
-                buildRoutes()
+                useUserStore().buildMenusAndButtons(res.data.menuList)
                 await router.push('/')
             } catch (e: any) {
                 if (e.data && e.data.code !== 0) {

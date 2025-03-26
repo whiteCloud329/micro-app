@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
+import { MenuItemType, MenuType, UserInfoType } from '@/types/system/user.ts'
 
 export const useUserStore = defineStore('userStore', () => {
-    const userInfo = reactive({
+    const userInfo = reactive<UserInfoType>({
         token: '',
         // 员工id
         employeeId: '',
@@ -57,13 +58,57 @@ export const useUserStore = defineStore('userStore', () => {
         return null
     }
     //
-    const setUserLoginInfo = (userInfo: any) => {
+    const setUserLoginInfo = (data: UserInfoType) => {
+        if (data.menuList) {
+            userInfo.menuTree = buildMenus(data.menuList)
+            userInfo.pointsList = getPoints(data.menuList)
+        }
+        // userInfo
         console.log(userInfo)
     }
     // 获取菜单&按钮权限
-    const buildMenusAndButtons = (list: any) => {
-        console.log(list)
+    const buildMenus = (menuList: MenuType) => {
+        console.log(menuList)
+        //1 获取所有 有效的 目录和菜单
+        let catalogAndMenuList = menuList.filter(
+            (menu: MenuItemType) =>
+                menu.menuType !== 3 && menu.visibleFlag && !menu.disabledFlag,
+        )
+
+        //2 获取顶级目录
+        let topCatalogList = catalogAndMenuList.filter(
+            (menu: MenuItemType) => menu.parentId === 0,
+        )
+        for (const topCatalog of topCatalogList) {
+            buildMenuChildren(topCatalog, catalogAndMenuList)
+        }
+        return topCatalogList
     }
+
+    function buildMenuChildren(menu: MenuItemType, allMenuList: MenuType) {
+        let children = allMenuList.filter(
+            (e: any) => e.parentId === menu.menuId,
+        )
+        if (children.length === 0) {
+            return
+        }
+        menu.children = children
+        for (const item of children) {
+            buildMenuChildren(item, allMenuList)
+        }
+    }
+
+    function getPoints(menuList: MenuType) {
+        return menuList
+            .filter(
+                (menu: MenuItemType) =>
+                    menu.menuType == 3 &&
+                    menu.visibleFlag &&
+                    !menu.disabledFlag,
+            )
+            .map((menu: MenuItemType) => menu.webPerms)
+    }
+
     // 退出系统
     const logout = () => {
         userInfo.token = ''
@@ -74,6 +119,5 @@ export const useUserStore = defineStore('userStore', () => {
         getToken,
         logout,
         setUserLoginInfo,
-        buildMenusAndButtons,
     }
 })
